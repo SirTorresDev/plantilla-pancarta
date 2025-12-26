@@ -3,139 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Plantillas</title>
+    <title>Generador de Pancartas - Crea letras imprimibles</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuentes de Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka+One&family=Pacifico&family=Roboto+Slab:wght@700&family=Bangers&family=Lobster&family=Abril+Fatface&family=Righteous&family=Chewy&family=Great+Vibes&family=Cinzel:wght@700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka+One&family=Pacifico&family=Roboto+Slab:wght@700&family=Bangers&family=Lobster&family=Abril+Fatface&family=Righteous&family=Chewy&family=Great+Vibes&family=Cinzel:wght@700&family=Gloria+Hallelujah&family=Satisfy&family=Permanent+Marker&family=Monoton&family=Black+Ops+One&family=Bungee&family=Bebas+Neue&family=Alfa+Slab+One&family=Passion+One:wght@700&family=Sigmar+One&family=Titan+One&family=Staatliches&family=Lilita+One&family=Racing+Sans+One&family=Fugaz+One&family=Russo+One&family=Ultra&family=Shrikhand&family=Covered+By+Your+Grace&family=Caveat:wght@700&family=Shadows+Into+Light&family=Kaushan+Script&family=Dancing+Script:wght@700&family=Yellowtail&family=Cookie&family=Mr+Dafoe&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 min-h-screen font-sans">
 
-    <!-- Panel de Control Compacto -->
-    <div class="no-print bg-white shadow-md p-4 sticky top-0 z-50 border-b-4 border-blue-500">
-        <div class="max-w-7xl mx-auto">
-            <h1 class="text-xl font-bold text-gray-800 mb-3 text-center flex items-center justify-center gap-2">
-                🖨️ Generador de Plantilla 
-                <span class="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded hidden sm:inline-block">Configura y luego imprime</span>
-            </h1>
+    <!-- Panel de Control Moderno -->
+    <div class="no-print bg-white/95 backdrop-blur-sm shadow-xl sticky top-0 z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
+            <!-- Header -->
+            <div class="text-center mb-2 sm:mb-3">
+                <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-1 flex items-center justify-center gap-2 flex-wrap">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                    </svg>
+                    Generador de Pancartas
+                </h1>
+                <p class="text-xs text-gray-500 hidden sm:block">Crea letras personalizadas para imprimir</p>
+            </div>
             
-            <!-- Grid principal optimizado a 6 columnas para incluir el tamaño -->
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 items-end">
-                
-                <!-- 1. Entrada de Texto (2 columnas) -->
-                <div class="col-span-1 md:col-span-3 lg:col-span-2">
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Mensaje:</label>
+            <!-- Primera Fila: Mensaje y Tipografía -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-2">
+                <!-- 1. Entrada de Texto -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">📝 Mensaje:</label>
                     <input type="text" id="inputText" value="TE ECHAREMOS DE MENOS" 
-                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 uppercase font-bold text-base"
-                        oninput="updatePreview()">
+                        class="w-full px-3 py-2 border-2 border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all uppercase font-bold text-base hover:border-gray-400"
+                        oninput="updatePreview()" placeholder="Escribe tu mensaje...">
                 </div>
 
-                <!-- 2. Fuente (1 columna) -->
-                <div class="col-span-1">
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Tipografía:</label>
-                    <select id="fontSelect" onchange="updatePreview()" 
-                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm cursor-pointer text-sm">
-                        <optgroup label="Divertidas">
-                            <option value="font-chewy">Gomitas</option>
-                            <option value="font-comic">Cómic</option>
-                            <option value="font-fun">Redondita</option>
-                            <option value="font-marker">Rotulador</option>
+                <!-- 2. Fuente -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">🎨 Tipografía:</label>
+                    <select id="fontSelect" onchange="updatePreview()" class="w-full px-2 py-2 border-2 border-gray-300 rounded-lg shadow-sm cursor-pointer text-sm hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
+                        <optgroup label="🎨 Divertidas y Juguetonas">
+                            <option value="font-chewy">Gomitas (Chewy)</option>
+                            <option value="font-comic">Cómic (Bangers)</option>
+                            <option value="font-fun">Redondita (Fredoka One)</option>
+                            <option value="font-marker">Rotulador (Gloria)</option>
+                            <option value="font-lilita">Redondeada (Lilita One)</option>
+                            <option value="font-titan">Burbujas (Titan One)</option>
+                            <option value="font-shrikhand">Groovy (Shrikhand)</option>
                         </optgroup>
-                        <optgroup label="Elegantes">
-                            <option value="font-calligraphy">Caligrafía</option>
-                            <option value="font-royal">Imperial</option>
-                            <option value="font-retro">Retro</option>
-                            <option value="font-elegant">Cursiva</option>
+                        <optgroup label="✨ Elegantes y Manuscritas">
+                            <option value="font-calligraphy">Caligrafía (Great Vibes)</option>
+                            <option value="font-royal">Imperial (Cinzel)</option>
+                            <option value="font-retro">Retro (Lobster)</option>
+                            <option value="font-elegant">Cursiva (Pacifico)</option>
+                            <option value="font-satisfy">Refinada (Satisfy)</option>
+                            <option value="font-kaushan">Manuscrita (Kaushan)</option>
+                            <option value="font-dancing">Ballet (Dancing Script)</option>
+                            <option value="font-yellowtail">Elegante (Yellowtail)</option>
+                            <option value="font-cookie">Dulce (Cookie)</option>
+                            <option value="font-dafoe">Sofisticada (Mr Dafoe)</option>
                         </optgroup>
-                        <optgroup label="Clásicas">
-                            <option value="font-impact">Impacto</option>
-                            <option value="font-poster">Póster</option>
-                            <option value="font-classic">Clásica</option>
+                        <optgroup label="💪 Fuertes e Impactantes">
+                            <option value="font-impact">Impacto (Anton)</option>
+                            <option value="font-poster">Póster (Abril Fatface)</option>
+                            <option value="font-bebas">Condensada (Bebas Neue)</option>
+                            <option value="font-blackops">Stencil (Black Ops One)</option>
+                            <option value="font-bungee">Moderna (Bungee)</option>
+                            <option value="font-alfa">Gruesa (Alfa Slab One)</option>
+                            <option value="font-passion">Expresiva (Passion One)</option>
+                            <option value="font-sigmar">Redondeada Fuerte (Sigmar)</option>
+                            <option value="font-ultra">Ultra Negrita (Ultra)</option>
+                        </optgroup>
+                        <optgroup label="🏁 Deportivas y Dinámicas">
+                            <option value="font-racing">Carreras (Racing Sans One)</option>
+                            <option value="font-fugaz">Veloz (Fugaz One)</option>
+                            <option value="font-russo">Deportiva (Russo One)</option>
+                            <option value="font-staatliches">Atlética (Staatliches)</option>
+                        </optgroup>
+                        <optgroup label="🎪 Especiales y Únicas">
+                            <option value="font-monoton">Neón (Monoton)</option>
+                            <option value="font-permanent">Marcador (Permanent Marker)</option>
+                            <option value="font-covered">Pintada (Covered By Your Grace)</option>
+                            <option value="font-caveat">Informal (Caveat)</option>
+                            <option value="font-shadows">Sombras (Shadows Into Light)</option>
+                        </optgroup>
+                        <optgroup label="📰 Clásicas">
+                            <option value="font-classic">Clásica (Roboto Slab)</option>
+                            <option value="font-modern">Moderna (Righteous)</option>
                         </optgroup>
                     </select>
                 </div>
+            </div>
 
-                <!-- 3. Estilo (1 columna) -->
-                <div class="col-span-1">
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Estilo:</label>
-                    <select id="styleSelect" onchange="updatePreview()" 
-                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm cursor-pointer text-sm">
-                        <option value="outline">⚪ Solo Borde</option>
-                        <option value="solid">⚫ Relleno</option>
+            <!-- Segunda Fila: Resto de Controles -->
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 mb-2 items-start">
+                <!-- 3. Estilo -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">✏️ Estilo:</label>
+                    <select id="styleSelect" onchange="updatePreview()" class="w-full px-2 py-2 border-2 border-gray-300 rounded-lg shadow-sm cursor-pointer text-sm hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
+                        <option value="outline">Borde</option>
+                        <option value="solid">Relleno</option>
                     </select>
                 </div>
 
-                <!-- 4. Color (1 columna) -->
-                <div class="col-span-1">
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Color:</label>
+                <!-- 4. Color -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">🎨 Color:</label>
                     <input type="color" id="colorPicker" value="#000000" 
-                        class="h-[38px] w-full p-1 border border-gray-300 rounded cursor-pointer"
+                        class="h-[40px] w-full p-1 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition-all shadow-sm"
                         oninput="updatePreview()">
                 </div>
 
-                <!-- 5. Tamaño relativo (1 columna) -->
-                <div class="col-span-1">
-                    <label class="block text-xs font-bold text-gray-700 mb-1 flex justify-between">
-                        Tamaño letra: <span id="sizeLabel" class="text-blue-600 font-normal">90%</span>
-                    </label>
-                    <div class="h-[38px] flex items-center border border-gray-200 rounded px-2 bg-gray-50">
-                        <input type="range" id="sizeSlider" min="50" max="100" value="90" step="1"
-                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                            oninput="updatePreview()">
-                    </div>
-                </div>
-
-                <!-- 6. Letras por Hoja (1 columna) -->
-                <div class="col-span-1">
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Letras/Hoja:</label>
-                    <select id="lettersPerPage" onchange="updatePreview()" 
-                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm cursor-pointer text-sm">
-                        <option value="1">1 letra</option>
-                        <option value="2">2 letras</option>
-                        <option value="3">3 letras</option>
-                        <option value="4">4 letras</option>
-                        <option value="6">6 letras</option>
+                <!-- 5. Letras por Hoja -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">📄 Letras/Hoja:</label>
+                    <select id="lettersPerPage" onchange="updatePreview()" class="w-full px-2 py-2 border-2 border-gray-300 rounded-lg shadow-sm cursor-pointer text-sm hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="6">6</option>
                         <option value="9" selected>Todas</option>
                     </select>
                 </div>
 
-                <!-- 7. Orientación (1 columna) -->
-                <div class="col-span-1">
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Orientación:</label>
-                    <select id="orientationSelect" onchange="updatePreview()" 
-                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm cursor-pointer text-sm">
-                        <option value="portrait" selected>Vertical (A4)</option>
-                        <option value="landscape">Horizontal (A4)</option>
+                <!-- 6. Orientación -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">📐 Orientación:</label>
+                    <select id="orientationSelect" onchange="updatePreview()" class="w-full px-2 py-2 border-2 border-gray-300 rounded-lg shadow-sm cursor-pointer text-sm hover:border-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
+                        <option value="portrait" selected>Vertical</option>
+                        <option value="landscape">Horizontal</option>
                     </select>
                 </div>
 
-                <!-- 8. Guías de corte -->
-                <div class="col-span-1 flex items-center gap-2">
-                    <input id="guidesToggle" type="checkbox" class="h-4 w-4" checked onchange="updatePreview()" />
-                    <label for="guidesToggle" class="text-xs font-bold text-gray-700">Guías de corte</label>
+                <!-- 7. Guías -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">✂️ Guías:</label>
+                    <label class="inline-flex items-center gap-2 cursor-pointer select-none mt-3">
+                        <input id="guidesToggle" type="checkbox" class="checkbox-modern" checked onchange="updatePreview()" />
+                        <span class="text-xs font-semibold text-gray-700">Activar</span>
+                    </label>
                 </div>
 
-                
+                <!-- 8. Tamaño -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">📏 Tamaño: <span id="sizeLabel" class="text-blue-600">90%</span></label>
+                    <input type="range" id="sizeSlider" min="50" max="100" value="90" step="1"
+                        class="w-full h-2 bg-gradient-to-r from-blue-200 to-blue-500 rounded-lg appearance-none cursor-pointer slider-modern mt-3"
+                        oninput="updatePreview()">
+                </div>
+
             </div>
 
-            <!-- Botón de impresión (Fila inferior compacta) -->
-            <div class="mt-3 flex justify-between items-center border-t pt-2 border-gray-100">
-                 <p class="text-xs text-gray-400 hidden sm:block">
-                    💡 Truco: Si el color no cambia, quita el modo "Solo Borde".
-                </p>
+            <!-- Botón de impresión -->
+            <div class="flex justify-end pt-1 border-t border-gray-200">
                 <button onclick="triggerPrint()" 
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow hover:shadow-lg transition transform hover:scale-105 flex items-center gap-2 text-sm ml-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
                     </svg>
-                    IMPRIMIR
+                    <span class="text-base">IMPRIMIR</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Área de Visualización / Impresión -->
-    <div id="previewArea" class="print-container max-w-7xl mx-auto p-4">
+    <!-- Área de Visualización -->
+    <div id="previewArea" class="print-container max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <!-- Las letras se generarán aquí con JS -->
     </div>
 
