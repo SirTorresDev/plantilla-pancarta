@@ -8,6 +8,12 @@
         padding: 0 !important; 
     }
     
+    /* Forzar tamaño de página A4 en impresión */
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+    
     .print-container { 
         display: block !important;
         max-width: none !important;
@@ -18,18 +24,16 @@
     }
     
     .page-wrapper { 
-        display: flex !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        align-content: flex-start !important;
-        gap: 10px !important;
-        padding: 20px !important;
+        display: block !important; /* la rejilla interna se aplica inline en pantalla y también vale para impresión */
+        gap: 0 !important;
+        padding: 0 !important; /* márgenes gestionados por @page y padding inline de preview */
         page-break-after: always !important;
         page-break-inside: avoid !important;
         break-after: page !important;
         break-inside: avoid !important;
         width: 100% !important;
         margin: 0 !important;
+        height: auto !important;
     }
     
     .page-break { 
@@ -41,6 +45,25 @@
         -webkit-print-color-adjust: exact !important; 
         print-color-adjust: exact !important;
     }
+}
+
+/* Previsualización en pantalla con dimensiones A4 aproximadas */
+.a4-preview {
+    width: 794px;   /* ~210mm a 96dpi */
+    height: 1123px; /* ~297mm a 96dpi */
+    background: #ffffff;
+    border: 1px solid #e5e7eb; /* gris claro */
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+    margin: 16px auto;
+}
+
+.cut-border { border: 2px dashed #d1d5db; }
+
+/* Ajustes de layout en pantalla para contenedor de previsualización */
+.print-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Clases de fuentes */
