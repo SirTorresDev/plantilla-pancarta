@@ -55,12 +55,10 @@ function updatePreview() {
     const orientation = orientationEl ? orientationEl.value : 'portrait';
     const showGuides = document.getElementById('guidesToggle')?.checked ?? true;
     const marginMm = 0; // sin márgenes para ocupar todo el folio
-    
-    const mmToPx = (mm) => Math.round(mm * 3.7795275591); // 96dpi aprox
-    const a4Portrait = { w: 794, h: 1123 }; // aprox a 96dpi
-    const a4Landscape = { w: 1123, h: 794 };
-    const pageSize = orientation === 'landscape' ? a4Landscape : a4Portrait;
-    const paddingPx = mmToPx(marginMm);
+    // Medidas reales en mm para A4
+    const a4PortraitMM = { w: 210, h: 297 };
+    const a4LandscapeMM = { w: 297, h: 210 };
+    const pageSizeMM = orientation === 'landscape' ? a4LandscapeMM : a4PortraitMM;
     
     // Actualizar regla @page dinámica para impresión
     (function applyPrintSettings(){
@@ -97,9 +95,9 @@ function updatePreview() {
         // contenedor de página A4
         const page = document.createElement('div');
         page.className = 'page-wrapper a4-preview';
-        page.style.width = pageSize.w + 'px';
-        page.style.height = pageSize.h + 'px';
-        page.style.padding = paddingPx + 'px';
+        page.style.width = pageSizeMM.w + 'mm';
+        page.style.height = pageSizeMM.h + 'mm';
+        page.style.padding = '0';
 
         // grid interno para las letras
         const grid = document.createElement('div');
@@ -108,7 +106,8 @@ function updatePreview() {
         grid.style.display = 'grid';
         grid.style.gap = '0px';
 
-        const [rows, cols] = getGridDimensions(pageLetters.length, orientation);
+        // Mantener tamaño uniforme tomando el número del selector, no de la última página
+        const [rows, cols] = getGridDimensions(lettersPerPage, orientation);
         grid.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
         grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
@@ -122,6 +121,18 @@ function updatePreview() {
             }
             grid.appendChild(cell);
             cellObjs.push({ cell, letter });
+        }
+
+        // Completar la rejilla con celdas vacías para mantener tamaño
+        const totalCells = rows * cols;
+        const remaining = totalCells - pageLetters.length;
+        for (let k = 0; k < remaining; k++) {
+            const empty = document.createElement('div');
+            empty.style.display = 'block';
+            empty.style.width = '100%';
+            empty.style.height = '100%';
+            // Sin borde en celdas vacías
+            grid.appendChild(empty);
         }
 
         page.appendChild(grid);
