@@ -1,10 +1,46 @@
 /* Estilos para impresión */
 @media print {
     .no-print { display: none !important; }
-    body { background-color: white; }
-    .page-break { break-inside: avoid; page-break-inside: avoid; }
-    .print-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    
+    body { 
+        background-color: white !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+    }
+    
+    .print-container { 
+        display: block !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-wrap: nowrap !important;
+        gap: 0 !important;
+    }
+    
+    .page-wrapper { 
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-content: flex-start !important;
+        gap: 10px !important;
+        padding: 20px !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        break-after: page !important;
+        break-inside: avoid !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    
+    .page-break { 
+        break-inside: avoid !important; 
+        page-break-inside: avoid !important;
+    }
+    
+    * { 
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important;
+    }
 }
 
 /* Clases de fuentes */
