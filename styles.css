@@ -1,0 +1,25 @@
+/* Estilos para impresión */
+@media print {
+    .no-print { display: none !important; }
+    body { background-color: white; }
+    .page-break { break-inside: avoid; page-break-inside: avoid; }
+    .print-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+
+/* Clases de fuentes */
+.font-impact { font-family: 'Anton', sans-serif; }
+.font-fun { font-family: 'Fredoka One', cursive; }
+.font-elegant { font-family: 'Pacifico', cursive; }
+.font-classic { font-family: 'Roboto Slab', serif; }
+.font-comic { font-family: 'Bangers', system-ui; letter-spacing: 2px; }
+.font-retro { font-family: 'Lobster', cursive; }
+.font-poster { font-family: 'Abril Fatface', cursive; }
+.font-modern { font-family: 'Righteous', cursive; }
+.font-chewy { font-family: 'Chewy', cursive; }
+.font-marker { font-family: 'Gloria Hallelujah', cursive; }
+.font-calligraphy { font-family: 'Great Vibes', cursive; }
+.font-royal { font-family: 'Cinzel', serif; }
+
+/* Estilo contorno */
+.outline-text { color: transparent; -webkit-text-stroke: 2px black; }

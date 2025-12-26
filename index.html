@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Plantillas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuentes de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka+One&family=Pacifico&family=Roboto+Slab:wght@700&family=Bangers&family=Lobster&family=Abril+Fatface&family=Righteous&family=Chewy&family=Great+Vibes&family=Cinzel:wght@700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+
+    <!-- Panel de Control Compacto -->
+    <div class="no-print bg-white shadow-md p-4 sticky top-0 z-50 border-b-4 border-blue-500">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-xl font-bold text-gray-800 mb-3 text-center flex items-center justify-center gap-2">
+                🖨️ Generador de Plantilla 
+                <span class="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded hidden sm:inline-block">Configura y luego imprime</span>
+            </h1>
+            
+            <!-- Grid principal optimizado a 6 columnas para incluir el tamaño -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 items-end">
+                
+                <!-- 1. Entrada de Texto (2 columnas) -->
+                <div class="col-span-1 md:col-span-3 lg:col-span-2">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Mensaje:</label>
+                    <input type="text" id="inputText" value="TE ECHAREMOS DE MENOS" 
+                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 uppercase font-bold text-base"
+                        oninput="updatePreview()">
+                </div>
+
+                <!-- 2. Fuente (1 columna) -->
+                <div class="col-span-1">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Tipografía:</label>
+                    <select id="fontSelect" onchange="updatePreview()" 
+                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm cursor-pointer text-sm">
+                        <optgroup label="Divertidas">
+                            <option value="font-chewy">Gomitas</option>
+                            <option value="font-comic">Cómic</option>
+                            <option value="font-fun">Redondita</option>
+                            <option value="font-marker">Rotulador</option>
+                        </optgroup>
+                        <optgroup label="Elegantes">
+                            <option value="font-calligraphy">Caligrafía</option>
+                            <option value="font-royal">Imperial</option>
+                            <option value="font-retro">Retro</option>
+                            <option value="font-elegant">Cursiva</option>
+                        </optgroup>
+                        <optgroup label="Clásicas">
+                            <option value="font-impact">Impacto</option>
+                            <option value="font-poster">Póster</option>
+                            <option value="font-classic">Clásica</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <!-- 3. Estilo (1 columna) -->
+                <div class="col-span-1">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Estilo:</label>
+                    <select id="styleSelect" onchange="updatePreview()" 
+                        class="w-full p-2 border border-gray-300 rounded-md shadow-sm cursor-pointer text-sm">
+                        <option value="outline">⚪ Solo Borde</option>
+                        <option value="solid">⚫ Relleno</option>
+                    </select>
+                </div>
+
+                <!-- 4. Color (1 columna) -->
+                <div class="col-span-1">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Color:</label>
+                    <input type="color" id="colorPicker" value="#000000" 
+                        class="h-[38px] w-full p-1 border border-gray-300 rounded cursor-pointer"
+                        oninput="updatePreview()">
+                </div>
+
+                <!-- 5. Tamaño (1 columna) - MOVIDO AQUÍ -->
+                <div class="col-span-1">
+                    <label class="block text-xs font-bold text-gray-700 mb-1 flex justify-between">
+                        Tamaño: <span id="sizeLabel" class="text-blue-600 font-normal">180px</span>
+                    </label>
+                    <div class="h-[38px] flex items-center border border-gray-200 rounded px-2 bg-gray-50">
+                        <input type="range" id="sizeSlider" min="80" max="240" value="180" 
+                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                            oninput="updatePreview()">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Botón de impresión (Fila inferior compacta) -->
+            <div class="mt-3 flex justify-between items-center border-t pt-2 border-gray-100">
+                 <p class="text-xs text-gray-400 hidden sm:block">
+                    💡 Truco: Si el color no cambia, quita el modo "Solo Borde".
+                </p>
+                <button onclick="triggerPrint()" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow hover:shadow-lg transition transform hover:scale-105 flex items-center gap-2 text-sm ml-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                    </svg>
+                    IMPRIMIR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área de Visualización / Impresión -->
+    <div id="previewArea" class="print-container max-w-7xl mx-auto p-8 flex flex-wrap justify-center gap-4">
+        <!-- Las letras se generarán aquí con JS -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
