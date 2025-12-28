@@ -14,9 +14,19 @@
     body { 
         background-color: white !important; 
         margin: 0 !important; 
-        padding: 0 !important; 
+        padding: 0 !important;
+    }
+    
+    /* Dimensiones portrait (vertical) */
+    body.print-portrait {
         width: 210mm !important;
         height: 297mm !important;
+    }
+    
+    /* Dimensiones landscape (horizontal) */
+    body.print-landscape {
+        width: 297mm !important;
+        height: 210mm !important;
     }
     
     @page {
@@ -32,8 +42,15 @@
         padding: 0 !important;
         flex-wrap: nowrap !important;
         gap: 0 !important;
-        width: 210mm !important;
         height: auto !important;
+    }
+    
+    .print-container.portrait-container {
+        width: 210mm !important;
+    }
+    
+    .print-container.landscape-container {
+        width: 297mm !important;
     }
     
     .page-wrapper { 
@@ -44,10 +61,18 @@
         page-break-inside: avoid !important;
         break-after: page !important;
         break-inside: avoid !important;
-        width: 210mm !important;
-        height: 297mm !important;
         margin: 0 !important;
         overflow: hidden !important;
+    }
+    
+    .page-wrapper.portrait { 
+        width: 210mm !important;
+        height: 297mm !important;
+    }
+    
+    .page-wrapper.landscape { 
+        width: 297mm !important;
+        height: 210mm !important;
     }
     
     .page-break { 
@@ -69,8 +94,17 @@
     margin: 8px auto;
     transition: box-shadow 0.3s ease;
     width: 100%;
-    aspect-ratio: 210 / 297;
     max-width: none;
+}
+
+/* Orientación vertical (portrait) */
+.a4-preview.portrait {
+    aspect-ratio: 210 / 297;
+}
+
+/* Orientación horizontal (landscape) */
+.a4-preview.landscape {
+    aspect-ratio: 297 / 210;
 }
 
 .a4-preview:hover {

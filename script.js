@@ -75,7 +75,11 @@ function updatePreview() {
     document.getElementById('sizeLabel').innerText = sizePercent + '%';
 
     const container = document.getElementById('previewArea');
-    container.innerHTML = ''; 
+    container.innerHTML = '';
+    
+    // Añadir clase de orientación al contenedor para impresión
+    container.className = `print-container ${orientation}-container`;
+    document.body.className = `print-${orientation}`; 
 
     // Filtrar solo caracteres válidos (no espacios)
     const letters = Array.from(text).filter(char => char !== ' ');
@@ -94,7 +98,7 @@ function updatePreview() {
 
         // contenedor de página A4
         const page = document.createElement('div');
-        page.className = 'page-wrapper a4-preview';
+        page.className = `page-wrapper a4-preview ${orientation}`;
         page.style.width = '100%';
         page.style.maxWidth = '100%';
         page.style.padding = '0';
@@ -147,7 +151,8 @@ function updatePreview() {
             if (cellObjs.length === 0) return;
             const rect = cellObjs[0].cell.getBoundingClientRect();
             const base = Math.min(rect.width, rect.height);
-            const fontPx = Math.floor(base * (sizePercent / 100) * 0.9); // 0.9 para respiración
+            // Factor más conservador (0.7) para evitar que las letras se salgan
+            const fontPx = Math.floor(base * (sizePercent / 100) * 0.7);
             for (const { letter } of cellObjs) {
                 letter.style.fontSize = fontPx + 'px';
             }
