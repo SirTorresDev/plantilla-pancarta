@@ -95,9 +95,10 @@ function updatePreview() {
         // contenedor de página A4
         const page = document.createElement('div');
         page.className = 'page-wrapper a4-preview';
-        page.style.width = pageSizeMM.w + 'mm';
-        page.style.height = pageSizeMM.h + 'mm';
+        page.style.width = '100%';
+        page.style.maxWidth = '100%';
         page.style.padding = '0';
+        page.style.boxSizing = 'border-box';
 
         // grid interno para las letras
         const grid = document.createElement('div');
@@ -105,6 +106,9 @@ function updatePreview() {
         grid.style.height = '100%';
         grid.style.display = 'grid';
         grid.style.gap = '0px';
+        grid.style.margin = '0';
+        grid.style.padding = '0';
+        grid.style.boxSizing = 'border-box';
 
         // Mantener tamaño uniforme tomando el número del selector, no de la última página
         const [rows, cols] = getGridDimensions(lettersPerPage, orientation);

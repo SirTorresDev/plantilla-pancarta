@@ -4,17 +4,25 @@
 
 /* Estilos para impresión */
 @media print {
+    html {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
     .no-print { display: none !important; }
     
     body { 
         background-color: white !important; 
         margin: 0 !important; 
         padding: 0 !important; 
+        width: 210mm !important;
+        height: 297mm !important;
     }
     
     @page {
         size: A4;
-        margin: 10mm;
+        margin: 0mm;
+        padding: 0mm;
     }
     
     .print-container { 
@@ -24,6 +32,8 @@
         padding: 0 !important;
         flex-wrap: nowrap !important;
         gap: 0 !important;
+        width: 210mm !important;
+        height: auto !important;
     }
     
     .page-wrapper { 
@@ -34,9 +44,10 @@
         page-break-inside: avoid !important;
         break-after: page !important;
         break-inside: avoid !important;
-        width: 100% !important;
+        width: 210mm !important;
+        height: 297mm !important;
         margin: 0 !important;
-        height: auto !important;
+        overflow: hidden !important;
     }
     
     .page-break { 
@@ -50,14 +61,16 @@
     }
 }
 
-/* Previsualización A4 - Más grande y visible */
+/* Previsualizacion A4 - Proporciones correctas */
 .a4-preview {
     background: #ffffff;
     border: 1px solid #e5e7eb;
     box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
-    margin: 24px auto;
+    margin: 8px auto;
     transition: box-shadow 0.3s ease;
-    max-width: 90%;
+    width: 100%;
+    aspect-ratio: 210 / 297;
+    max-width: none;
 }
 
 .a4-preview:hover {
@@ -73,7 +86,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 1rem;
+    padding: 1rem 0.5rem;
 }
 
 /* ===========================================
